@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicross - Foreign Employment Medical Center</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --secondary: #06b6d4;
+      --accent: #8b5cf6;
+      --light: #f0f9ff;
+      --dark: #0f172a;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .blur-overlay {
+      backdrop-filter: blur(8px);
+    }
+
+    .navbar-glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-gradient {
+      background: linear-gradient(135deg, #0284c7, #8b5cf6);
+    }
+
+    .card-hover {
+      transition: all 0.4s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .section {
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .card-gradient {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: all 0.3s ease;
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-primary:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      transition: all 0.5s ease;
+      z-index: -1;
+      border-radius: 9999px;
+    }
+
+    .btn-primary:hover:before {
+      width: 100%;
+    }
+
+    .service-card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      margin: -40px auto 20px;
+      box-shadow: 0 10px 20px rgba(11, 50, 160, 0.2);
+      position: relative;
+      z-index: 2;
+    }
+
+    .doctor-card {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+    }
+
+    .doctor-social {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .doctor-card:hover .doctor-social {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .testimonial-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      position: relative;
+      padding: 30px;
+      overflow: visible;
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      font-size: 120px;
+      color: rgba(14, 165, 233, 0.1);
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-family: serif;
+      line-height: 1;
+    }
+
+    .blog-card {
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .blog-card img {
+      transition: all 0.8s ease;
+    }
+
+    .blog-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .contact-form-container {
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+      backdrop-filter: blur(10px);
+    }
+
+    .form-control {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(14, 165, 233, 0.2);
+      border-radius: 10px;
+      padding: 12px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      background: white;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.15);
+    }
+
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      z-index: 999;
+    }
+
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .stats-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.4s ease;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .stats-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: white;
+      font-size: 24px;
+      animation: pulse 2s infinite;
+    }
+
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.2;
+      border-radius: 50%;
+    }
+
+    .shape1 {
+      background: var(--primary);
+      width: 400px;
+      height: 400px;
+      top: -200px;
+      left: -200px;
+    }
+
+    .shape2 {
+      background: var(--accent);
+      width: 300px;
+      height: 300px;
+      top: 50%;
+      right: -150px;
+    }
+
+    .shape3 {
+      background: var(--secondary);
+      width: 200px;
+      height: 200px;
+      bottom: -100px;
+      left: 30%;
+    }
+
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.4));
+      display: flex;
+      align-items: center;
+      padding: 0 10%;
+    }
+
+    .carousel-content {
+      max-width: 600px;
+    }
+
+    .carousel-indicators {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .carousel-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-indicator.active {
+      background: white;
+      width: 30px;
+      border-radius: 10px;
+    }
+
+    .feature-number {
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 1;
+      opacity: 0.05;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .dark-mode {
+      background-color: var(--dark);
+      color: var(--light);
+    }
+
+    .dark-mode .navbar-glass {
+      background: rgba(15, 23, 42, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .dark-mode .stats-card,
+    .dark-mode .service-card,
+    .dark-mode .testimonial-card,
+    .dark-mode .blog-card,
+    .dark-mode .contact-form-container {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .dark-mode .form-control {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .dark-mode .form-control:focus {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: var(--primary);
+    }
+
+    .dark-mode .card-gradient {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.6));
+    }
+
+    /* Floating Animation */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Removed .float class as per user request */
+    /* .float {
+      animation: float 5s ease-in-out infinite;
+    } */
+
+    /* Removed .float-delay-1 and .float-delay-2 as per user request */
+    /* .float-delay-1 {
+      animation-delay: 1s;
+    }
+
+    .float-delay-2 {
+      animation-delay: 2s;
+    } */
+
+    .reveal-element {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal-element.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Pulse animation for stats icons */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-sky-50 text-gray-800">
+  <div class="scroll-to-top" id="scrollToTop">
+    <i class="fas fa-chevron-up"></i>
+  </div>
+
+  <nav class="navbar-glass fixed w-full z-50 transition-all duration-300">
+    <div class="container mx-auto px-6 py-3">
+      <div class="flex justify-between items-center">
+        <div class="flex items-center">
+          <a href="#" class="flex items-center">
+            <div class="w-10 h-10 bg-gradient-to-r from-sky-500 to-violet-500 rounded-lg flex items-center justify-center mr-3">
+              <span class="text-white text-xl font-bold">M</span>
+            </div>
+            <div class="text-2xl font-bold gradient-text">Medicross</div>
+          </a>
+        </div>
+
+        <div class="hidden lg:flex items-center space-x-10">
+          <a href="#home" class="text-gray-800 hover:text-sky-500 font-medium transition-colors">Home</a>
+          <a href="#about" class="text-gray-800 hover:text-sky-500 font-medium transition-colors">About</a>
+          <a href="#services" class="text-gray-800 hover:text-sky-500 font-medium transition-colors">Services</a>
+          <a href="#testimonials" class="text-gray-800 hover:text-sky-500 font-medium transition-colors">Testimonials</a>
+          <a href="#contact" class="text-gray-800 hover:text-sky-500 font-medium transition-colors">Contact</a>
+        </div>
+
+        <div class="flex items-center">
+          <button id="darkModeToggle" class="p-2 rounded-full hover:bg-gray-200 transition-colors mr-4">
+            <i class="fas fa-moon text-gray-800"></i>
+          </button>
+          <a href="#appointment" class="hidden md:block btn-primary text-white px-6 py-3 rounded-full font-medium text-sm tracking-wide">
+            Book Appointment
+          </a>
+          <button id="mobileMenuToggle" class="lg:hidden p-2 rounded-full hover:bg-gray-200 transition-colors ml-4">
+            <i class="fas fa-bars text-gray-800"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobileMenu" class="hidden lg:hidden mt-4 bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300">
+        <div class="flex flex-col py-2">
+          <a href="#home" class="px-6 py-3 hover:bg-sky-50 transition-colors">Home</a>
+          <a href="#about" class="px-6 py-3 hover:bg-sky-50 transition-colors">About</a>
+          <a href="#services" class="px-6 py-3 hover:bg-sky-50 transition-colors">Services</a>
+          <a href="#testimonials" class="px-6 py-3 hover:bg-sky-50 transition-colors">Testimonials</a>
+          <a href="#contact" class="px-6 py-3 hover:bg-sky-50 transition-colors">Contact</a>
+          <a href="#appointment" class="mx-6 my-3 btn-primary text-white px-6 py-3 rounded-full font-medium text-center">
+            Book Appointment
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="pt-32 pb-20 relative overflow-hidden">
+    <div class="animated-bg" style="z-index: 0;">
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 mb-10 lg:mb-0">
+          <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+            Your Journey, <span class="gradient-text">Our Medical Clearance</span>
+          </h1>
+          <p class="text-lg text-gray-600 mb-8 max-w-lg">
+            Medicross is your trusted partner for comprehensive medical examinations required for foreign employment. We ensure a smooth and efficient process for your international journey.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="#appointment" class="btn-primary text-white px-8 py-4 rounded-full font-semibold text-center shadow-lg">
+              Book Your Medical
+            </a>
+            <a href="#services" class="bg-white text-sky-500 border border-sky-500 px-8 py-4 rounded-full font-semibold text-center hover:bg-sky-50 transition-colors shadow-lg">
+              Our Services
+            </a>
+          </div>
+
+          <div class="flex items-center mt-12">
+            <div class="flex -space-x-4">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" class="w-12 h-12 rounded-full border-2 border-white object-cover" alt="Applicant">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" class="w-12 h-12 rounded-full border-2 border-white object-cover" alt="Applicant">
+              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100&q=80" class="w-12 h-12 rounded-full border-2 border-white object-cover" alt="Applicant">
+              <div class="w-12 h-12 rounded-full border-2 border-white bg-sky-500 flex items-center justify-center text-white font-medium">
+                +2k
+              </div>
+            </div>
+            <div class="ml-4">
+              <div class="text-gray-600 text-sm">Trusted by</div>
+              <div class="text-lg font-semibold">2,500+ Applicants</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:w-1/2 relative">
+          <div class="carousel-container shadow-2xl">
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173fdabea2e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')"></div>
+
+            <div class="carousel-overlay">
+              <div class="carousel-content">
+                <h2 class="text-4xl text-white font-bold mb-4">Efficient Medical Clearances</h2>
+                <p class="text-white text-lg opacity-90 mb-6">Streamlined medical examinations for your foreign employment needs.</p>
+                <a href="#appointment" class="btn-primary text-white px-6 py-3 rounded-full font-medium inline-block">
+                  Learn More
+                </a>
+              </div>
+            </div>
+
+            <div class="carousel-indicators">
+              <div class="carousel-indicator active"></div>
+              <div class="carousel-indicator"></div>
+              <div class="carousel-indicator"></div>
+            </div>
+          </div>
+
+          <div class="absolute -bottom-10 -left-10 bg-white rounded-2xl shadow-xl p-6 card-gradient animate__animated animate__fadeInUp">
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mr-4">
+                <i class="fas fa-calendar-check text-green-500"></i>
+              </div>
+              <div>
+                <div class="text-xl font-semibold">98%</div>
+                <div class="text-gray-500 text-sm">Clearance Success</div>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="stats-card">
+          <div class="stats-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="text-4xl font-bold mb-2 gradient-text" data-count="10000">0</div>
+          <div class="text-gray-600">Cleared Applicants</div>
+        </div>
+
+        <div class="stats-card">
+          <div class="stats-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <div class="text-4xl font-bold mb-2 gradient-text" data-count="50">0</div>
+          <div class="text-gray-600">Countries Served</div>
+        </div>
+
+        <div class="stats-card">
+          <div class="stats-icon">
+            <i class="fas fa-clipboard-check"></i>
+          </div>
+          <div class="text-4xl font-bold mb-2 gradient-text" data-count="100">0</div>
+          <div class="text-gray-600">Medical Tests</div>
+        </div>
+
+        <div class="stats-card">
+          <div class="stats-icon">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="text-4xl font-bold mb-2 gradient-text" data-count="25">0</div>
+          <div class="text-gray-600">Years Experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="py-20 bg-sky-50 relative overflow-hidden">
+    <div class="animated-bg">
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
+    </div>
+
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-12">
+        <h6 class="text-sky-500 font-medium mb-2 uppercase tracking-wider">About Us</h6>
+        <h2 class="text-4xl font-bold mb-4">Your Trusted Partner for <span class="gradient-text">Foreign Employment Medicals</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">We provide comprehensive and reliable medical examinations tailored for international employment requirements, ensuring your readiness for global opportunities.</p>
+      </div>
+
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+        <div class="lg:w-1/2 relative">
+          <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600&q=80" alt="Medical examination facility" class="w-full rounded-3xl shadow-2xl z-10 relative">
+
+          <div class="absolute -bottom-8 -right-8 w-64 h-64 bg-sky-500 rounded-full opacity-10"></div>
+          <div class="absolute -top-8 -left-8 w-32 h-32 bg-violet-500 rounded-full opacity-10"></div>
+
+          <div class="absolute bottom-8 -right-12 bg-white rounded-2xl shadow-xl p-6 card-gradient">
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center mr-4">
+                <i class="fas fa-badge-check text-violet-500"></i>
+              </div>
+              <div>
+                <div class="text-xl font-semibold">Certified</div>
+                <div class="text-gray-500 text-sm">Global Standards</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:w-1/2">
+          <h3 class="text-3xl font-bold mb-6">Ensuring Your <span class="gradient-text">Global Readiness</span></h3>
+          <p class="text-gray-600 mb-6">Medicross has been a leader in foreign employment medical assessments for over 25 years. Our mission is to provide accurate, efficient, and reliable medical screenings that meet international standards, facilitating your journey abroad.</p>
+
+          <div class="space-y-6">
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-sky-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fas fa-check-circle text-sky-500"></i>
+              </div>
+              <div>
+                <h4 class="text-xl font-semibold mb-2">Accurate & Efficient Screenings</h4>
+                <p class="text-gray-600">State-of-the-art diagnostic equipment and streamlined processes for quick and precise medical reports.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fas fa-gavel text-purple-500"></i>
+              </div>
+              <div>
+                <h4 class="text-xl font-semibold mb-2">Compliance with Regulations</h4>
+                <p class="text-gray-600">Ensuring all medical examinations adhere strictly to the requirements of various destination countries.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start">
+              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                <i class="fas fa-passport text-green-500"></i>
+              </div>
+              <div>
+                <h4 class="text-xl font-semibold mb-2">Seamless Application Support</h4>
+                <p class="text-gray-600">We assist you through every step of the medical clearance process, making your application stress-free.</p>
+              </div>
+            </div>
+          </div>
+          <a href="#appointment" class="btn-primary text-white px-8 py-4 rounded-full font-semibold mt-10 inline-block shadow-lg">
+            Book Your Medical
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h6 class="text-sky-500 font-medium mb-2 uppercase tracking-wider">Our Services</h6>
+        <h2 class="text-4xl font-bold mb-4">Comprehensive <span class="gradient-text">Medical Examinations</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">We offer a full range of medical tests and screenings required for foreign employment visas and permits.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div class="service-card bg-white shadow-xl p-8 pt-10 text-center animate__animated animate__fadeInUp">
+          <div class="service-icon">
+            <i class="fas fa-lungs text-white text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Chest X-Ray & Lung Function</h3>
+          <p class="text-gray-600 mb-6">Essential screenings to assess respiratory health for various employment destinations.</p>
+          <a href="#" class="text-sky-500 font-semibold hover:text-sky-700 transition-colors">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+        </div>
+
+        <div class="service-card bg-white shadow-xl p-8 pt-10 text-center animate__animated animate__fadeInUp animate__delay-0-2s">
+          <div class="service-icon">
+            <i class="fas fa-vial text-white text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Blood & Urine Tests</h3>
+          <p class="text-gray-600 mb-6">Comprehensive laboratory tests including blood counts, liver function, kidney function, and urinalysis.</p>
+          <a href="#" class="text-sky-500 font-semibold hover:text-sky-700 transition-colors">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+        </div>
+
+        <div class="service-card bg-white shadow-xl p-8 pt-10 text-center animate__animated animate__fadeInUp animate__delay-0-4s">
+          <div class="service-icon">
+            <i class="fas fa-syringe text-white text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Vaccination & Immunization</h3>
+          <p class="text-gray-600 mb-6">Ensuring you meet the required immunization profiles for your destination country.</p>
+          <a href="#" class="text-sky-500 font-semibold hover:text-sky-700 transition-colors">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+        </div>
+
+        <div class="service-card bg-white shadow-xl p-8 pt-10 text-center animate__animated animate__fadeInUp animate__delay-0-6s">
+          <div class="service-icon">
+            <i class="fas fa-notes-medical text-white text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Physical Examination</h3>
+          <p class="text-gray-600 mb-6">A thorough general physical assessment by our qualified medical professionals.</p>
+          <a href="#" class="text-sky-500 font-semibold hover:text-sky-700 transition-colors">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+        </div>
+
+        <div class="service-card bg-white shadow-xl p-8 pt-10 text-center animate__animated animate__fadeInUp animate__delay-0-8s">
+          <div class="service-icon">
+            <i class="fas fa-virus text-white text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Infectious Disease Screening</h3>
+          <p class="text-gray-600 mb-6">Screening for conditions such as Hepatitis, HIV, and Tuberculosis as per immigration rules.</p>
+          <a href="#" class="text-sky-500 font-semibold hover:text-sky-700 transition-colors">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+        </div>
+
+        <div class="service-card bg-white shadow-xl p-8 pt-10 text-center animate__animated animate__fadeInUp animate__delay-1s">
+          <div class="service-icon">
+            <i class="fas fa-file-medical text-white text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Medical Report & Certification</h3>
+          <p class="text-gray-600 mb-6">Issuance of certified medical reports and health certificates for your visa application.</p>
+          <a href="#" class="text-sky-500 font-semibold hover:text-sky-700 transition-colors">Read More <i class="fas fa-arrow-right text-sm ml-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-sky-50 relative overflow-hidden">
+    <div class="animated-bg">
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-12">
+        <h6 class="text-sky-500 font-medium mb-2 uppercase tracking-wider">Why Choose Us</h6>
+        <h2 class="text-4xl font-bold mb-4">The Medicross <span class="gradient-text">Advantage</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Discover what sets Medicross apart – a commitment to efficiency, accuracy, and your global mobility.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-8">
+          <div class="relative p-6 bg-white rounded-2xl shadow-lg card-hover">
+            <div class="relative z-10 flex items-start">
+              <div class="w-16 h-16 bg-gradient-to-r from-sky-500 to-blue-500 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                <i class="fas fa-certificate text-white text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold mb-3">Globally Recognized Certification</h3>
+                <p class="text-gray-600">Our medical reports are widely accepted and trusted by immigration authorities and employers worldwide, ensuring smooth processing of your foreign employment applications.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative p-6 bg-white rounded-2xl shadow-lg card-hover">
+            <div class="relative z-10 flex items-start">
+              <div class="w-16 h-16 bg-gradient-to-r from-violet-500 to-purple-500 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                <i class="fas fa-clock text-white text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold mb-3">Fast & Reliable Processing</h3>
+                <p class="text-gray-600">We understand the urgency of your foreign employment plans. Our streamlined processes and dedicated team ensure quick turnaround times for your medical examinations and reports.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative p-6 bg-white rounded-2xl shadow-lg card-hover">
+            <div class="relative z-10 flex items-start">
+              <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                <i class="fas fa-headset text-white text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold mb-3">Dedicated Applicant Support</h3>
+                <p class="text-gray-600">Our friendly staff is here to guide you through every step of the medical examination, from booking to report collection, ensuring a hassle-free experience.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hidden lg:block relative text-center">
+          <img src="https://images.unsplash.com/photo-1579684385153-f09315d9fb5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Medical professional assisting an applicant" class="w-full h-auto rounded-3xl shadow-2xl">
+          <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-white rounded-2xl shadow-xl p-6 card-gradient">
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mr-4">
+                <i class="fas fa-comments text-orange-500"></i>
+              </div>
+              <div>
+                <div class="text-xl font-semibold">24/7</div>
+                <div class="text-gray-500 text-sm">Online Support</div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute top-10 -right-10 bg-white rounded-2xl shadow-xl p-6 card-gradient">
+            <div class="flex items-center">
+              <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center mr-4">
+                <i class="fas fa-file-export text-sky-500"></i>
+              </div>
+              <div>
+                <div class="text-xl font-semibold">Global</div>
+                <div class="text-gray-500 text-sm">Acceptance</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="py-20 bg-sky-50 relative overflow-hidden">
+    <div class="animated-bg">
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-12">
+        <h6 class="text-sky-500 font-medium mb-2 uppercase tracking-wider">Testimonials</h6>
+        <h2 class="text-4xl font-bold mb-4">What Our <span class="gradient-text">Applicants Say</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Hear from those who have successfully obtained their medical clearances through Medicross.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div class="testimonial-card shadow-xl p-8 animate__animated animate__fadeInLeft">
+          <div class="flex items-center mb-6">
+            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=100&h=100&q=80" class="w-20 h-20 rounded-full object-cover mr-6 border-4 border-sky-500" alt="Sarah Johnson">
+            <div>
+              <h4 class="text-xl font-bold">Sarah Johnson</h4>
+              <p class="text-gray-500">Successful Applicant</p>
+            </div>
+          </div>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">"Medicross made my foreign employment medical examination so easy and quick. The staff was very helpful, and I received my reports on time, allowing me to proceed with my visa application without delay."</p>
+          <div class="flex text-yellow-400">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+        </div>
+
+        <div class="testimonial-card shadow-xl p-8 animate__animated animate__fadeInRight">
+          <div class="flex items-center mb-6">
+            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=100&h=100&q=80" class="w-20 h-20 rounded-full object-cover mr-6 border-4 border-violet-500" alt="David Williams">
+            <div>
+              <h4 class="text-xl font-bold">David Williams</h4>
+              <p class="text-gray-500">Satisfied Client</p>
+            </div>
+          </div>
+          <p class="text-lg text-gray-700 leading-relaxed mb-6">"I highly recommend Medicross for foreign employment medicals. Their professionalism and efficiency are unmatched. They guided me through all the necessary tests, and I got my clearance without any issues."</p>
+          <div class="flex text-yellow-400">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="appointment" class="py-20 bg-sky-50 relative overflow-hidden">
+    <div class="animated-bg">
+      <div class="shape shape1"></div>
+      <div class="shape shape2"></div>
+      <div class="shape shape3"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="text-center mb-12">
+        <h6 class="text-sky-500 font-medium mb-2 uppercase tracking-wider">Book Now</h6>
+        <h2 class="text-4xl font-bold mb-4">Schedule Your <span class="gradient-text">Medical Examination</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Easily book your required medical examination online. Your foreign employment journey starts here.</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto contact-form-container shadow-2xl p-8 lg:p-12 animate__animated animate__fadeInUp">
+        <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+            <input type="text" id="name" name="name" class="form-control w-full" placeholder="Your Full Name" required>
+          </div>
+          <div>
+            <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control w-full" placeholder="your@example.com" required>
+          </div>
+          <div>
+            <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="form-control w-full" placeholder="+1 (XXX) XXX-XXXX">
+          </div>
+          <div>
+            <label for="service" class="block text-gray-700 font-medium mb-2">Required Medical Exam</label>
+            <select id="service" name="service" class="form-control w-full" required>
+              <option value="">Select type of medical exam</option>
+              <option value="general">General Medical Check-up</option>
+              <option value="xray">Chest X-Ray</option>
+              <option value="blood-urine">Blood & Urine Tests</option>
+              <option value="vaccination">Vaccination Review</option>
+              <option value="infectious">Infectious Disease Screening</option>
+              <option value="specific-country">Country-Specific Medical</option>
+            </select>
+          </div>
+          <div>
+            <label for="country" class="block text-gray-700 font-medium mb-2">Destination Country (Optional)</label>
+            <input type="text" id="country" name="country" class="form-control w-full" placeholder="e.g., Canada, UAE">
+          </div>
+          <div>
+            <label for="date" class="block text-gray-700 font-medium mb-2">Preferred Date</label>
+            <input type="date" id="date" name="date" class="form-control w-full" required>
+          </div>
+          <div class="md:col-span-2">
+            <label for="message" class="block text-gray-700 font-medium mb-2">Your Message (Optional)</label>
+            <textarea id="message" name="message" rows="4" class="form-control w-full" placeholder="Any specific requirements or questions?"></textarea>
+          </div>
+          <div class="md:col-span-2 text-center">
+            <button type="submit" class="btn-primary text-white px-8 py-4 rounded-full font-semibold shadow-lg">
+              Submit Appointment Request
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="py-20 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-12">
+        <h6 class="text-sky-500 font-medium mb-2 uppercase tracking-wider">Contact Us</h6>
+        <h2 class="text-4xl font-bold mb-4">Get In <span class="gradient-text">Touch</span></h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">We're here to help! Reach out to us with any questions or to schedule your medical examination.</p>
+      </div>
+
+      <div class="flex flex-col lg:flex-row gap-10 items-center">
+        <div class="lg:w-1/2 w-full space-y-8">
+          <div class="flex items-start bg-white p-6 rounded-2xl shadow-lg card-hover">
+            <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+              <i class="fas fa-map-marker-alt text-sky-500 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Our Location</h3>
+              <p class="text-gray-600">456 Global Path, Clearance City, State 67890, Country</p>
+            </div>
+          </div>
+
+          <div class="flex items-start bg-white p-6 rounded-2xl shadow-lg card-hover">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+              <i class="fas fa-phone-alt text-purple-500 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Phone Number</h3>
+              <p class="text-gray-600">General Inquiries: +1 (555) 123-4567</p>
+              <p class="text-gray-600">Appointments: +1 (555) 987-6543</p>
+            </div>
+          </div>
+
+          <div class="flex items-start bg-white p-6 rounded-2xl shadow-lg card-hover">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+              <i class="fas fa-envelope text-green-500 text-2xl"></i>
+            </div>
+            <div>
+              <h3 class="text-xl font-bold mb-2">Email Address</h3>
+              <p class="text-gray-600">info@medicross.com</p>
+              <p class="text-gray-600">appointments@medicross.com</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:w-1/2 w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3168.629399432612!2d-122.08424968469388!3d37.4220037798229!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb18037d04f2f%3A0x6b441c0e3e2c3b8c!2sGoogleplex!5e0!3m2!1sen!2sus!4v1678234567890!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-gray-300 py-16">
+    <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div>
+        <a href="#" class="flex items-center mb-6">
+          <div class="w-10 h-10 bg-gradient-to-r from-sky-500 to-violet-500 rounded-lg flex items-center justify-center mr-3">
+            <span class="text-white text-xl font-bold">M</span>
+          </div>
+          <div class="text-2xl font-bold text-white">Medicross</div>
+        </a>
+        <p class="text-gray-400 leading-relaxed mb-6">
+          Medicross is your trusted foreign employment medical center, dedicated to providing accurate and efficient medical clearances for your global journey.
+        </p>
+        <div class="flex space-x-4">
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 text-gray-400 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 text-gray-400 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 text-gray-400 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="w-10 h-10 rounded-full bg-gray-800 text-gray-400 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-colors">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-white text-xl font-bold mb-6">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+          <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+          <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Our Services</a></li>
+          <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors">Testimonials</a></li>
+          <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white text-xl font-bold mb-6">Medical Examinations</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-white transition-colors">General Medical Check-up</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Chest X-Ray</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blood & Urine Tests</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Vaccination Review</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Infectious Disease Screening</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Country-Specific Medicals</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white text-xl font-bold mb-6">Working Hours</h4>
+        <p class="text-gray-400 mb-2">Monday - Friday: <span class="font-medium text-white">9:00 AM - 6:00 PM</span></p>
+        <p class="text-gray-400 mb-2">Saturday: <span class="font-medium text-white">9:00 AM - 2:00 PM</span></p>
+        <p class="text-gray-400">Sunday: <span class="font-medium text-white">Closed</span></p>
+        <p class="text-gray-400 mt-6">For urgent inquiries: <a href="tel:+1234567890" class="text-sky-500 hover:underline">+1 (555) 123-4567</a></p>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+      © 2024 Medicross. All rights reserved. Designed with <span class="text-red-500">♥</span> by YourBrand.
+    </div>
+  </footer>
+
+  <script>
+    // GSAP ScrollTrigger for section animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.querySelectorAll('section').forEach((section) => {
+      if (section.id !== 'home') { // Skip hero section for this animation
+        gsap.from(section, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 75%", // When the top of the section hits 75% of the viewport
+            end: "bottom center",
+            toggleActions: "play none none reverse", // Play on enter, reverse on leave back
+          }
+        });
+      }
+    });
+
+    // Animate individual elements (e.g., text, images) on scroll
+    // Adjusted to check if the element has an 'animate__animated' class for consistency with CSS
+    document.querySelectorAll('.animate__animated').forEach(element => {
+      gsap.from(element, {
+        opacity: 0,
+        y: 50,
+        duration: 1,
+        delay: parseFloat(element.dataset.delay) || 0, // Use data-delay attribute
+        scrollTrigger: {
+          trigger: element,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        }
+      });
+    });
+
+    // Navbar scroll effect
+    const navbar = document.querySelector('.navbar-glass');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        // Ensure dark mode styles are applied correctly when switching background
+        if (document.body.classList.contains('dark-mode')) {
+          navbar.classList.add('shadow-lg', 'bg-gray-800');
+          navbar.classList.remove('navbar-glass', 'bg-white');
+        } else {
+          navbar.classList.add('shadow-lg', 'bg-white');
+          navbar.classList.remove('navbar-glass', 'bg-gray-800');
+        }
+      } else {
+        // Revert to glass effect when scrolled back up
+        navbar.classList.remove('shadow-lg', 'bg-white', 'bg-gray-800');
+        navbar.classList.add('navbar-glass');
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      const isDarkMode = body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+      darkModeToggle.querySelector('i').classList.toggle('fa-sun', isDarkMode);
+      darkModeToggle.querySelector('i').classList.toggle('fa-moon', !isDarkMode);
+
+      // Re-apply navbar background based on dark mode state
+      if (window.scrollY > 50) {
+        if (isDarkMode) {
+          navbar.classList.add('bg-gray-800');
+          navbar.classList.remove('bg-white');
+        } else {
+          navbar.classList.add('bg-white');
+          navbar.classList.remove('bg-gray-800');
+        }
+      }
+    });
+
+    // Check for dark mode preference on load
+    if (localStorage.getItem('darkMode') === 'true') {
+      body.classList.add('dark-mode');
+      darkModeToggle.querySelector('i').classList.add('fa-sun');
+      darkModeToggle.querySelector('i').classList.remove('fa-moon');
+      // Apply correct navbar background on load if scrolled down
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-gray-800');
+        navbar.classList.remove('bg-white');
+      }
+    } else {
+      darkModeToggle.querySelector('i').classList.add('fa-moon');
+      darkModeToggle.querySelector('i').classList.remove('fa-sun');
+      // Apply correct navbar background on load if scrolled down
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-white');
+        navbar.classList.remove('bg-gray-800');
+      }
+    }
+
+
+    // Scroll to top button functionality
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('visible');
+      } else {
+        scrollToTopBtn.classList.remove('visible');
+      }
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Hero Carousel
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        indicators[i].classList.remove('active');
+        if (i === index) {
+          slide.classList.add('active');
+          indicators[i].classList.add('active');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
+
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    showSlide(currentSlide); // Initialize first slide
+
+    // Number Counter Animation for Stats Section
+    const statsCards = document.querySelectorAll('.stats-card');
+
+    statsCards.forEach(card => {
+      const countElement = card.querySelector('.gradient-text');
+      const targetCount = parseInt(countElement.dataset.count);
+      let animationPlayed = false; // Flag to ensure animation plays only once per scroll down
+
+      ScrollTrigger.create({
+        trigger: card,
+        start: "top 80%", // When the top of the card enters the viewport
+        onEnter: () => {
+          if (!animationPlayed) { // Only play if not already played
+            gsap.to(countElement, {
+              innerText: targetCount,
+              duration: 2,
+              snap: "innerText",
+              ease: "power1.out",
+              onUpdate: () => {
+                countElement.innerText = Math.round(countElement.innerText);
+              }
+            });
+            animationPlayed = true; // Set flag to true after playing
+          }
+        },
+        onLeaveBack: () => { // Reset flag if scrolling back up
+          animationPlayed = false;
+          countElement.innerText = 0; // Reset text to 0
+        }
+      });
+    });
+  </script>
+</body>
+</html>
